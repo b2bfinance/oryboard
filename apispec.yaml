@@ -1,0 +1,105 @@
+---
+openapi: 3.0.0
+info:
+  title: Oryboard API
+  description: Oryboard API
+  version: 1.0.0
+servers:
+  - url: 'https://oryboard.internal'
+paths:
+  /stats:
+    get:
+      operationId: GetStatistics
+      description: Get statistics.
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetStatisticsResponse"
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /identities:
+    get:
+      operationId: ListIdentities
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListIdentitiesResponse"
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /oauth/clients:
+    get:
+      operationId: ListOAuthClients
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOAuthClientsResponse"
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: number
+        message:
+          type: string
+      required:
+        - code
+        - message
+
+    GetStatisticsResponse:
+      type: object
+      properties:
+        count_identities:
+          type: number
+        count_hydra_clients:
+          type: number
+      required:
+        - count_identities
+        - count_hydra_clients
+
+    Identity:
+      type: object
+      properties:
+        account_id:
+          type: string
+      required:
+        - account_id
+
+    ListIdentitiesResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/Identity"
+      required:
+        - items
+
+
+    ListOAuthClientsResponse:
+      type: object
+      properties:
+        client_id:
+          type: string
+      required:
+        - "client_id"

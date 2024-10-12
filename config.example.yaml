@@ -1,0 +1,63 @@
+---
+host: "0.0.0.0"
+port: 8000
+
+kratos:
+  public:
+    address: "https://kratos:443/"
+  admin:
+    address: "http://localhost:4434/"
+  config_provider:
+    file: "kratos-config.yaml"
+    s3: # Suitable for when configuration is on AWS S3 or Google Cloud Storage.
+      bucket: "infra"
+      region: "us-east-1"
+      endpoint: "https://storage.googleapis.com"
+      key: "DM49O7M2O91H2ON7AKWG"
+      secret: "3kK7OaEIk6bsWQALgjDs1SemdTJRTua9OA5Aq6JO"
+      object: "kratos-config.yaml"
+    kubernetes:
+      namespace: "default"
+      config_name: "kratos-config"
+      data_key: "kratos.yaml"
+      kubeconfig_path: "/root/.kube/config"
+
+hydra:
+  public:
+    address: "https://kratos:443/"
+  admin:
+    address: "https://kratos:443/"
+  config_provider:
+    file: "hydra-config.yaml"
+    s3: # Suitable for when configuration is on AWS S3 or Google Cloud Storage.
+      bucket: "infra"
+      region: "us-east-1"
+      endpoint: "https://storage.googleapis.com"
+      key: "DM49O7M2O91H2ON7AKWG"
+      secret: "3kK7OaEIk6bsWQALgjDs1SemdTJRTua9OA5Aq6JO"
+      object: "hydra-config.yaml"
+    kubernetes:
+      namespace: "default"
+      config_name: "hydra-config"
+      data_key: "config.yaml"
+      kubeconfig_path: ".kubeconfig"
+
+keto:
+  read:
+    address: "https://keto-read:443/"
+  write:
+    address: "https://keto:write:443/"
+  config_provider:
+    file: "keto-config.yaml"
+    s3: # Suitable for when configuration is on AWS S3 or Google Cloud Storage.
+      bucket: "infra"
+      region: "us-east-1"
+      endpoint: "https://storage.googleapis.com"
+      key: "DM49O7M2O91H2ON7AKWG"
+      secret: "3kK7OaEIk6bsWQALgjDs1SemdTJRTua9OA5Aq6JO"
+      object: "keto-config.yaml"
+    kubernetes:
+      namespace: "default"
+      config_name: "keto-config"
+      data_key: "config.yaml"
+      kubeconfig_path: ".kubeconfig"
